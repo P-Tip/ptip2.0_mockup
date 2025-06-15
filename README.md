@@ -1,1 +1,3 @@
-# ptip2.0_mockup
+# ptip2_mockup
+
+React + TypeScript project.
