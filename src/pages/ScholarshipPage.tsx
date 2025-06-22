@@ -192,6 +192,26 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
+      {/* 사이트 공지사항 배너 */}
+      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-100/50 backdrop-blur-sm">
+        <div className="max-w-[1280px] mx-auto px-6 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <i className="fas fa-bullhorn text-green-600"></i>
+            <p className="text-sm text-gray-700">
+              <span className="font-medium text-green-700 mr-2">[공지]</span>
+              5월 업데이트: 새로운 장학금 알림 기능이 추가되었습니다
+            </p>
+          </div>
+
+          {/* 🔄 외부 a → 내부 NavLink  */}
+          <NavLink
+              to="/notice"
+              className="text-gray-500 hover:text-gray-700 cursor-pointer"
+          >
+            <i className="fas fa-chevron-right"></i>
+          </NavLink>
+        </div>
+      </div>
       {/* 상단 헤더 */}
       <header className="bg-white/80 text-gray-800 backdrop-blur-md shadow-sm sticky top-0 z-10 border-b border-gray-100/50">
         <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 py-5">
@@ -290,7 +310,11 @@ const App: React.FC = () => {
             <h2 className="text-xl font-bold mb-6 text-gray-800">솔선수범 장학금 안내</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center mr-4 mt-1 shadow-sm border border-green-100">
+                <div
+                    className="w-12 h-12 rounded-full bg-gradient-to-br from-green-100 to-green-50
+             flex items-center justify-center mr-4 mt-1 shadow-sm border border-green-100
+             shrink-0"     /* ← 추가 */
+                >
                   <i className="fas fa-star text-green-600 text-lg"></i>
                 </div>
                 <div>
@@ -299,7 +323,11 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center mr-4 mt-1 shadow-sm border border-blue-100">
+                <div
+                    className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-50
+             flex items-center justify-center mr-4 mt-1 shadow-sm border border-blue-100
+             shrink-0"     /* ← 추가 */
+                >
                   <i className="fas fa-coins text-blue-600 text-lg"></i>
                 </div>
                 <div>
@@ -577,38 +605,60 @@ const App: React.FC = () => {
 
       {/* 모바일 하단 네비게이션 */}
       {isMobile && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 flex justify-around items-center z-10">
-          <a
-            href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/56654ed9-c57f-404a-9175-fba93b9db6d3"
-            data-readdy="true"
-            className="flex flex-col items-center text-gray-500 hover:text-green-600 transition-colors duration-200 cursor-pointer"
-          >
-            <i className="fas fa-home text-lg mb-1"></i>
-            <span className="text-xs">홈</span>
-          </a>
-          <button
-            className="flex flex-col items-center text-green-600 cursor-pointer"
-          >
-            <i className="fas fa-graduation-cap text-lg mb-1"></i>
-            <span className="text-xs">장학 프로그램</span>
-          </button>
-          <a
-            href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/b392cf82-d87d-4142-9459-7fa41c94c62d"
-            data-readdy="true"
-            className="flex flex-col items-center text-gray-500 hover:text-green-600 transition-colors duration-200 cursor-pointer"
-          >
-            <i className="fas fa-calendar-alt text-lg mb-1"></i>
-            <span className="text-xs">교내외 프로그램</span>
-          </a>
-          <a
-            href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/0d25b063-ddab-45fe-bc67-55a1a206f937"
-            data-readdy="true"
-            className="flex flex-col items-center text-gray-500 hover:text-green-600 transition-colors duration-200 cursor-pointer"
-          >
-            <i className="fas fa-user text-lg mb-1"></i>
-            <span className="text-xs">마이페이지</span>
-          </a>
-        </div>
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 flex justify-around items-center z-10">
+            {/* 홈 */}
+            <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                    `flex flex-col items-center cursor-pointer ${
+                        isActive ? "text-green-600" : "text-gray-500"
+                    }`
+                }
+            >
+              <i className="fas fa-home text-lg mb-1"></i>
+              <span className="text-xs">홈</span>
+            </NavLink>
+
+            {/* 장학 프로그램 */}
+            <NavLink
+                to="/scholarships"
+                className={({ isActive }) =>
+                    `flex flex-col items-center cursor-pointer ${
+                        isActive ? "text-green-600" : "text-gray-500"
+                    }`
+                }
+            >
+              <i className="fas fa-graduation-cap text-lg mb-1"></i>
+              <span className="text-xs">장학 프로그램</span>
+            </NavLink>
+
+            {/* 교내외 프로그램 */}
+            <NavLink
+                to="/programs"
+                className={({ isActive }) =>
+                    `flex flex-col items-center cursor-pointer ${
+                        isActive ? "text-green-600" : "text-gray-500"
+                    }`
+                }
+            >
+              <i className="fas fa-calendar-alt text-lg mb-1"></i>
+              <span className="text-xs">교내외 프로그램</span>
+            </NavLink>
+
+            {/* 마이페이지 */}
+            <NavLink
+                to="/mypage"
+                className={({ isActive }) =>
+                    `flex flex-col items-center cursor-pointer ${
+                        isActive ? "text-green-600" : "text-gray-500"
+                    }`
+                }
+            >
+              <i className="fas fa-user text-lg mb-1"></i>
+              <span className="text-xs">마이페이지</span>
+            </NavLink>
+          </div>
       )}
 
       {/* 상세정보 모달 */}

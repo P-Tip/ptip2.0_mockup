@@ -67,12 +67,17 @@ const App: React.FC = () => {
                         <i className="fas fa-bullhorn text-green-600"></i>
                         <p className="text-sm text-gray-700">
                             <span className="font-medium text-green-700 mr-2">[공지]</span>
-                            6월 업데이트: 새로운 장학금 알림 기능이 추가되었습니다
+                            5월 업데이트: 새로운 장학금 알림 기능이 추가되었습니다
                         </p>
                     </div>
-                    <a href="#" className="text-gray-500 hover:text-gray-700 cursor-pointer">
+
+                    {/* 🔄 외부 a → 내부 NavLink  */}
+                    <NavLink
+                        to="/notice"
+                        className="text-gray-500 hover:text-gray-700 cursor-pointer"
+                    >
                         <i className="fas fa-chevron-right"></i>
-                    </a>
+                    </NavLink>
                 </div>
             </div>
             {/* 상단 헤더 */}
@@ -380,7 +385,7 @@ const App: React.FC = () => {
                                             className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-all !rounded-button whitespace-nowrap cursor-pointer ${favoriteFilter === '전체' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                                             onClick={() => setFavoriteFilter('전체')}
                                         >
-                                            전체 보기
+                                            전체
                                         </button>
                                         <button
                                             className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-all !rounded-button whitespace-nowrap cursor-pointer ${favoriteFilter === '진행중' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
@@ -1024,43 +1029,59 @@ student@snu.ac.kr
             </main>
             {/* 모바일 하단 네비게이션 */}
             {isMobile && (
-                <div
-                    className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 flex justify-around items-center z-10">
-                    <a
-                        href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/56654ed9-c57f-404a-9175-fba93b9db6d3"
-                        data-readdy="true"
-                        className={`flex flex-col items-center ${activeTab === '홈' ? 'text-green-600' : 'text-gray-500'} cursor-pointer`}
-                        onClick={() => setActiveTab('홈')}
+                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 flex justify-around items-center z-10">
+                    {/* 홈 */}
+                    <NavLink
+                        to="/"
+                        end
+                        className={({ isActive }) =>
+                            `flex flex-col items-center cursor-pointer ${
+                                isActive ? "text-green-600" : "text-gray-500"
+                            }`
+                        }
                     >
                         <i className="fas fa-home text-lg mb-1"></i>
                         <span className="text-xs">홈</span>
-                    </a>
-                    <a
-                        href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/f7c1b969-a246-4d3c-b827-4ba0b0024e43"
-                        data-readdy="true"
-                        className={`flex flex-col items-center ${activeTab === '장학금' ? 'text-green-600' : 'text-gray-500'} cursor-pointer`}
-                        onClick={() => setActiveTab('장학금')}
+                    </NavLink>
+
+                    {/* 장학 프로그램 */}
+                    <NavLink
+                        to="/scholarships"
+                        className={({ isActive }) =>
+                            `flex flex-col items-center cursor-pointer ${
+                                isActive ? "text-green-600" : "text-gray-500"
+                            }`
+                        }
                     >
                         <i className="fas fa-graduation-cap text-lg mb-1"></i>
                         <span className="text-xs">장학 프로그램</span>
-                    </a>
-                    <a
-                        href="https://readdy.ai/home/642620c0-5557-4587-b200-3db6fc619d3d/b392cf82-d87d-4142-9459-7fa41c94c62d"
-                        data-readdy="true"
-                        className={`flex flex-col items-center ${activeTab === '프로그램' ? 'text-green-600' : 'text-gray-500'} cursor-pointer`}
-                        onClick={() => setActiveTab('프로그램')}
+                    </NavLink>
+
+                    {/* 교내외 프로그램 */}
+                    <NavLink
+                        to="/programs"
+                        className={({ isActive }) =>
+                            `flex flex-col items-center cursor-pointer ${
+                                isActive ? "text-green-600" : "text-gray-500"
+                            }`
+                        }
                     >
-                        <i className="fas fa-university text-lg mb-1"></i>
+                        <i className="fas fa-calendar-alt text-lg mb-1"></i>
                         <span className="text-xs">교내외 프로그램</span>
-                    </a>
-                    <a
-                        href="#"
-                        className={`flex flex-col items-center ${activeTab === 'MY' ? 'text-green-600' : 'text-gray-500'} cursor-pointer`}
-                        onClick={() => setActiveTab('MY')}
+                    </NavLink>
+
+                    {/* 마이페이지 */}
+                    <NavLink
+                        to="/mypage"
+                        className={({ isActive }) =>
+                            `flex flex-col items-center cursor-pointer ${
+                                isActive ? "text-green-600" : "text-gray-500"
+                            }`
+                        }
                     >
                         <i className="fas fa-user text-lg mb-1"></i>
                         <span className="text-xs">마이페이지</span>
-                    </a>
+                    </NavLink>
                 </div>
             )}
             {/* 비밀번호 변경 모달 */}
